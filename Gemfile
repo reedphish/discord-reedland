@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
 gem 'discordrb'
 gem 'rainbow'
+gem 'whois', '~> 4.0.0.pre.beta1'
+gem 'nokogiri'
+gem 'ruby-nmap'
+gem 'net-dns'
 gem 'rspec', :require => 'spec'
