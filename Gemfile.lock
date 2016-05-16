@@ -27,6 +27,7 @@ GEM
     netrc (0.11.0)
     opus-ruby (1.0.1)
       ffi
+    rainbow (2.1.0)
     rbnacl (3.4.0)
       ffi
     rest-client (1.8.0)
@@ -62,6 +63,7 @@ PLATFORMS
 
 DEPENDENCIES
   discordrb
+  rainbow
   rspec
 
 BUNDLED WITH
