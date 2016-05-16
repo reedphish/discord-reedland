@@ -2,6 +2,7 @@ require 'rubygems'
 require 'json'
 require './commands/whois'
 require './commands/host'
+require './commands/nmap'
 
 module Reedland
 	class Commands
@@ -11,6 +12,8 @@ module Reedland
 				return Reedland::Command::WHOIS.run(argument).to_s
 			when "host"
 				return Reedland::Command::Host.run(argument).to_s
+			when "nmap"
+				return Reedland::Command::NMAP.run(argument).to_s
 			end
 		end
 	end
