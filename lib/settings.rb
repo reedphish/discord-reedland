@@ -22,7 +22,7 @@ module Reedland
 		def get(section, setting)
 			begin
 				@settings[section][setting]
-			rescue NoMethodError
+			rescue Exception
 				raise("Unable to retrieve setting, check settings!")
 			end
 		end

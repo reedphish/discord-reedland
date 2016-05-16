@@ -1,0 +1,13 @@
+{
+	"nmap": {
+		"description": "Discover open SSH port using Nmap",
+		"command": "Nmap was done here",
+		"argument": "Comma separated list of hosts"
+	},
+
+	"hello": {
+		"decription": "Say hello test function",
+		"command": "Hello",
+		"argument": "No argument"
+	}
+}
