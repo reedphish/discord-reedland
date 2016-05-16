@@ -10,9 +10,11 @@ Disord-Reedland is a Discord Bot Proof of Concept. This is highly experimental c
 
 1 Install the following debs: "ruby", "ruby-devel", "libsodium18"
 
-2 Run: gem install bundler
+2 sudo apt-get install libxslt-dev libxml2-dev zlib1g-dev
 
-3 Run: bundle install
+3 Run: gem install bundler
+
+4 Run: bundle install
 
 Note: This bot does not use "libsodium18" at the moment. You can discard any warnings about it.
 
