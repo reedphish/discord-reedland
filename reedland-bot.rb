@@ -26,20 +26,11 @@ begin
 	botname = settings.get("discord", "botname")
 	
 	bot = Discordrb::Bot.new(token: token, application_id: applicationid, name: botname)
-	bot.message(with_text: "Hi!") do |event|
+	bot.pm(with_text: "Hi!") do |event|
   		event.respond "Hi, #{event.user.name}!"
 	end
 
 	bot.run(:async)
-
-=begin
-	if bot.servers.length == 0
-		puts("Please enter server invite code: ")
-		invitecode = gets.chomp
-		bot.join(invitecode)
-	end
-=end
-
 	bot.send_message(channelid, 'Bot is now active!')
 	bot.sync
 
