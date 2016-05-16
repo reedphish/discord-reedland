@@ -1,6 +1,10 @@
 {
 	"discord": {
-		"token": "xyz",
-		"application_id": "xyz"
+		"botname": "name of bot here",
+		"token": "your token here",
+		"applicationid": 123456789,
+		"serverid": 123456789,
+		"channelid": 123456789,
+		"botid": 123456789
 	}
 }
