@@ -3,6 +3,7 @@ require 'bundler/setup'
 
 # Require as usual below
 require 'discordrb'
+require 'json'
 require './lib/output'
 require './lib/settings'
 require './lib/commands'
@@ -42,6 +43,20 @@ begin
 				rescue Exception => e
 					event.respond("Error: #{e}")
 				end
+		elsif event.text.strip == "prune"
+			# event.channel.prune(100)
+#=begin
+			begin
+				puts(event.channel.id)
+				messagehistory = JSON.parse(Discordrb::API.channel_log(token, event.channel.id, 100))
+
+				messagehistory.each do |message|
+					Discordrb::API.delete_message(token, channelid, message["id"])
+				end
+			rescue Discordrb::Errors::NoPermission => e
+				event.respond(e)
+			end
+#=end
 		else
 			event.respond("I don't know if I can do that, Dave...")
 		end
