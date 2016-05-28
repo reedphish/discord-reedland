@@ -29,34 +29,21 @@ begin
 	botname = settings.get("discord", "botname")
 	
 	bot = Discordrb::Bot.new(token: token, application_id: applicationid, name: botname)
+
 	bot.pm do |event|
 		if event.text == "list"
 			event.respond(commands.list)
 		elsif event.text.start_with?("cmd")
-				commandline = event.text[3..-1].strip().split(" ")
-				command = commandline[0]
+			commandline = event.text[3..-1].strip().split(" ")
+			command = commandline[0]
 
-				commandline.delete_at(0)
+			commandline.delete_at(0)
 
-				begin
-					event.respond(commands.run(command, commandline))
-				rescue Exception => e
-					event.respond("Error: #{e}")
-				end
-		elsif event.text.strip == "prune"
-			# event.channel.prune(100)
-#=begin
 			begin
-				puts(event.channel.id)
-				messagehistory = JSON.parse(Discordrb::API.channel_log(token, event.channel.id, 100))
-
-				messagehistory.each do |message|
-					Discordrb::API.delete_message(token, channelid, message["id"])
-				end
-			rescue Discordrb::Errors::NoPermission => e
-				event.respond(e)
+				event.respond(commands.run(command, commandline))
+			rescue Exception => e
+				event.respond("Error: #{e}")
 			end
-#=end
 		else
 			event.respond("I don't know if I can do that, Dave...")
 		end
