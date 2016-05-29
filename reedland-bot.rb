@@ -27,8 +27,29 @@ begin
 	serverid = settings.get("discord", "serverid")
 	channelid = settings.get("discord", "channelid")
 	botname = settings.get("discord", "botname")
+	botid = settings.get("discord", "botid")
 	
-	bot = Discordrb::Bot.new(token: token, application_id: applicationid, name: botname)
+	bot = Discordrb::Bot.new(
+			token: token, 
+			application_id: applicationid, 
+			name: botname,
+		)
+
+	# System wide wall message
+	bot.message(start_with: '!wall') do |event|
+		message = event.content[5..-1].strip.upcase
+
+		if message.length > 0
+			server = Discordrb::Server.new(
+					JSON.parse(Discordrb::API.server(token, serverid)),
+					bot
+				)
+
+			server.online_users(include_idle: true, include_bots: false).each do | user |
+				user.pm(message)
+			end
+  		end
+	end
 
 	bot.pm do |event|
 		if event.text == "list"
