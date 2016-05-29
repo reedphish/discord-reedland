@@ -8,13 +8,20 @@ Disord-Reedland is a Discord Bot Proof of Concept. This is highly experimental c
 
 ### Ubuntu
 
-1 Install the following debs: "ruby", "ruby-devel", "libsodium18"
+1 Install the following debs: "ruby", "ruby-devel"
 
 2 sudo apt-get install libxslt-dev libxml2-dev zlib1g-dev
 
 3 Run: gem install bundler
 
 4 Run: bundle install
+
+5 Do the following
+
+sudo add-apt-repository ppa:chris-lea/libsodium;
+sudo echo "deb http://ppa.launchpad.net/chris-lea/libsodium/ubuntu xenial main" >> /etc/apt/sources.list;
+sudo echo "deb-src http://ppa.launchpad.net/chris-lea/libsodium/ubuntu xenial main" >> /etc/apt/sources.list;
+sudo apt-get update && sudo apt-get install libsodium-dev;
 
 Note: This bot does not use "libsodium18" at the moment. You can discard any warnings about it.
 
