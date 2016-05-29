@@ -8,7 +8,7 @@ require './lib/output'
 require './lib/settings'
 require './lib/commands'
 
-puts("Reedland-bot by Reedphish Heavy Industries. All rights reserved, 2016.")
+puts("Reedland-bot by Reedphish Heavy Industries. All rights reserved, 2016-#{Time.now.strftime("%Y")}")
 
 # Load settings and commands
 begin
@@ -25,7 +25,6 @@ begin
 	applicationid = settings.get("discord", "applicationid")
 	token = settings.get("discord", "token")
 	serverid = settings.get("discord", "serverid")
-	channelid = settings.get("discord", "channelid")
 	botname = settings.get("discord", "botname")
 	botid = settings.get("discord", "botid")
 	
@@ -35,6 +34,15 @@ begin
 			name: botname,
 			fancy_log: false
 		)
+
+	#
+	# Channel commands
+	#
+
+	# Is bot alive
+	bot.message(start_with: "!alive") do |event|
+		event.respond("Yes, #{event.author.name}, I am very much alive ...")
+	end
 
 	# System wide wall message
 	bot.message(start_with: '!wall') do |event|
@@ -53,11 +61,15 @@ begin
 	end
 
 	# Prune channel messages
-	bot.message(matches: "!prune") do |event|
+	bot.message(start_with: "!prune") do |event|
 		channeldata = JSON.parse(Discordrb::API.channel(token, event.channel.id))
 		channel = Discordrb::Channel.new(channeldata, bot)
 		channel.prune(100)
 	end
+
+	#
+	# PM commands
+	#
 
 	bot.pm do |event|
 		if event.text == "list"
@@ -74,12 +86,11 @@ begin
 				event.respond("Error: #{e}")
 			end
 		else
-			event.respond("I don't know if I can do that, Dave...")
+			event.respond("I don't know if I can do that, #{event.author.name}...")
 		end
 	end
 
 	bot.run(:async)
-	bot.send_message(channelid, 'Bot is now active!')
 	bot.sync
 rescue Exception => e
 	Reedland::Output::error(e)
