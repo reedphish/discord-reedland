@@ -33,6 +33,7 @@ begin
 			token: token, 
 			application_id: applicationid, 
 			name: botname,
+			fancy_log: false
 		)
 
 	# System wide wall message
@@ -49,6 +50,13 @@ begin
 				user.pm(message)
 			end
   		end
+	end
+
+	# Prune channel messages
+	bot.message(matches: "!prune") do |event|
+		channeldata = JSON.parse(Discordrb::API.channel(token, event.channel.id))
+		channel = Discordrb::Channel.new(channeldata, bot)
+		channel.prune(100)
 	end
 
 	bot.pm do |event|
